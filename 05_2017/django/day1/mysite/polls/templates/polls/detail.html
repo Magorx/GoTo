@@ -1,0 +1,18 @@
+{% load static %}
+
+<h1>{{ question.question_text }} ({{ vote_count }} votes)</h1>
+
+<form action="{% url 'add_choice' question.id %}" method="post">
+    {% csrf_token %}
+    <input name="choice_text">
+    <input type="submit" value="add choice">
+</form>
+
+<form action="{% url 'vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>

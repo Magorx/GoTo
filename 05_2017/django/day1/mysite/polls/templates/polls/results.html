@@ -1,0 +1,10 @@
+{% load static %}
+
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.votes }} - {{ choice.choice_text }}
+    {% endfor %}
+</ul>
+<a href={% url 'index' %}>To questions</a>
